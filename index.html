@@ -19,19 +19,12 @@
     --dim: #666;
   }
 
-  html {
-    height: 100%;
-    /* prevent iOS bounce scroll causing layout issues */
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
-  }
+  html { height: 100%; overflow: hidden; position: fixed; width: 100%; }
 
   body {
     background: var(--bg);
     color: var(--text);
     font-family: 'Share Tech Mono', monospace;
-    /* full height with dvh for iOS Safari address bar */
     height: 100%;
     width: 100%;
     overflow-y: auto;
@@ -40,24 +33,16 @@
     flex-direction: column;
     align-items: center;
     position: relative;
-    /* safe area for notched iPhones */
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* scanline overlay — use explicit sides for Safari */
   body::after {
     content: '';
     position: fixed;
     top: 0; right: 0; bottom: 0; left: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0,0,0,0.06) 2px,
-      rgba(0,0,0,0.06) 4px
-    );
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px);
     pointer-events: none;
     z-index: 9999;
   }
@@ -67,9 +52,8 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 560px;
+    max-width: 520px;
     padding: 20px 16px 32px;
-    /* min-height fallback for iOS */
     min-height: 100vh;
     min-height: 100dvh;
     animation: fadeIn 0.35s ease;
@@ -78,31 +62,28 @@
 
   @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
 
-  /* ── HEADINGS ── */
   h1 {
     font-family: 'Orbitron', sans-serif;
-    font-size: clamp(1.2rem, 5.5vw, 2.2rem);
+    font-size: clamp(1.15rem, 5.5vw, 2rem);
     letter-spacing: 0.1em;
     text-align: center;
     text-transform: uppercase;
     margin-bottom: 6px;
   }
   .subtitle {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     color: var(--dim);
     letter-spacing: 0.18em;
     text-align: center;
-    margin-bottom: 24px;
+    margin-bottom: 22px;
   }
 
-  /* ── SETUP SCREEN ── */
-  #setup {
-    justify-content: center;
-  }
+  /* ── SETUP ── */
+  #setup { justify-content: center; }
   #setup h1 { color: var(--amber); text-shadow: 0 0 18px rgba(255,204,0,0.5); }
 
   .section-label {
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     letter-spacing: 0.22em;
     color: var(--dim);
     text-transform: uppercase;
@@ -114,8 +95,7 @@
   .time-btns {
     display: flex;
     gap: 8px;
-    margin-bottom: 24px;
-    /* row-reverse for RTL logical order */
+    margin-bottom: 22px;
     flex-direction: row-reverse;
     align-items: center;
     width: 100%;
@@ -127,17 +107,16 @@
     border: 2px solid #333;
     color: var(--dim);
     font-family: 'Orbitron', sans-serif;
-    font-size: clamp(0.85rem, 3vw, 1.1rem);
+    font-size: clamp(0.8rem, 3vw, 1.05rem);
     cursor: pointer;
     border-radius: 6px;
     transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
     touch-action: manipulation;
-    /* min 44px touch target */
     min-height: 52px;
     -webkit-appearance: none;
     appearance: none;
   }
-  .time-btn:active { opacity: 0.75; }
+  .time-btn:active { opacity: 0.7; }
   .time-btn.selected {
     border-color: var(--amber);
     color: var(--amber);
@@ -146,23 +125,21 @@
   }
   .time-btn span {
     display: block;
-    font-size: 0.5rem;
+    font-size: 0.48rem;
     letter-spacing: 0.12em;
     color: inherit;
     margin-top: 3px;
     font-family: 'Share Tech Mono', monospace;
   }
-
-  /* TEST button — smaller */
   .test-btn {
     flex: 0 0 auto;
     padding: 8px 10px;
-    font-size: clamp(0.6rem, 2.5vw, 0.7rem);
+    font-size: clamp(0.58rem, 2.5vw, 0.68rem);
     min-height: 44px;
     border-color: #2a2a2a;
     color: #555;
   }
-  .test-btn span { font-size: 0.45rem; }
+  .test-btn span { font-size: 0.44rem; }
   .test-btn.selected {
     border-color: var(--red);
     color: var(--red);
@@ -170,40 +147,34 @@
     box-shadow: 0 0 14px rgba(255,34,34,0.25);
   }
 
-  /* Code inputs — responsive */
+  /* 4-digit code inputs */
   .code-inputs {
     display: flex;
-    gap: 6px;
-    margin-bottom: 28px;
+    gap: 8px;
+    margin-bottom: 26px;
     flex-direction: row-reverse;
     width: 100%;
     justify-content: center;
   }
   .code-inputs input {
-    /* fill available width, max 58px */
     flex: 1;
-    max-width: 58px;
+    max-width: 68px;
     min-width: 0;
-    height: 66px;
+    height: 70px;
     background: var(--panel2);
     border: 2px solid #333;
     border-radius: 6px;
     color: var(--amber);
     font-family: 'Orbitron', sans-serif;
-    /* 16px min to prevent iOS auto-zoom */
-    font-size: clamp(16px, 5vw, 2rem);
+    font-size: clamp(16px, 6vw, 2.2rem);
     text-align: center;
     outline: none;
     caret-color: var(--amber);
     transition: border-color 0.2s, box-shadow 0.2s;
     -webkit-appearance: none;
     appearance: none;
-    border-radius: 6px;
   }
-  .code-inputs input:focus {
-    border-color: var(--amber);
-    box-shadow: 0 0 10px rgba(255,204,0,0.3);
-  }
+  .code-inputs input:focus { border-color: var(--amber); box-shadow: 0 0 10px rgba(255,204,0,0.3); }
 
   .arm-btn {
     width: 100%;
@@ -213,7 +184,7 @@
     border-radius: 8px;
     color: #fff;
     font-family: 'Orbitron', sans-serif;
-    font-size: clamp(0.85rem, 3.5vw, 1.05rem);
+    font-size: clamp(0.82rem, 3.5vw, 1rem);
     letter-spacing: 0.16em;
     cursor: pointer;
     transition: opacity 0.15s, box-shadow 0.2s;
@@ -227,39 +198,52 @@
 
   .error-msg {
     margin-top: 10px;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     color: var(--red);
     letter-spacing: 0.08em;
     min-height: 18px;
     text-align: center;
   }
 
-  /* ── GAME SCREEN ── */
-  #game {
-    justify-content: flex-start;
-    padding-top: 16px;
-  }
+  /* ── GAME ── */
+  #game { justify-content: flex-start; padding-top: 14px; }
   #game h1 { color: var(--red); text-shadow: 0 0 20px rgba(255,34,34,0.6); }
+
+  /* attempts dots */
+  .attempt-dots {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-direction: row-reverse;
+    justify-content: center;
+  }
+  .dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #444;
+    background: transparent;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .dot.used { background: var(--red); border-color: var(--red); box-shadow: 0 0 6px rgba(255,34,34,0.7); }
 
   .bomb-wrapper {
     position: relative;
-    /* responsive: fill width up to 300px */
-    width: min(300px, 88vw);
-    aspect-ratio: 320 / 220;
-    margin: 0 auto 16px;
+    width: min(310px, 90vw);
+    aspect-ratio: 340 / 240;
+    margin: 0 auto 14px;
   }
-
   .bomb-svg {
     width: 100%;
     height: 100%;
-    filter: drop-shadow(0 0 12px rgba(255,34,34,0.35));
+    filter: drop-shadow(0 4px 18px rgba(0,0,0,0.8)) drop-shadow(0 0 10px rgba(255,34,34,0.2));
   }
 
   .timer-overlay {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -55%);
+    transform: translate(-50%, -56%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -267,67 +251,63 @@
   }
   .timer-display {
     font-family: 'Orbitron', sans-serif;
-    font-size: clamp(2rem, 9vw, 3.2rem);
+    font-size: clamp(1.9rem, 8.5vw, 3rem);
     font-weight: 900;
-    color: var(--red);
-    text-shadow: 0 0 18px rgba(255,34,34,0.9), 0 0 4px #fff;
-    letter-spacing: 0.05em;
+    color: #ff3300;
+    text-shadow: 0 0 14px rgba(255,50,0,0.95), 0 0 3px rgba(255,200,100,0.6);
+    letter-spacing: 0.06em;
     line-height: 1;
   }
-  .timer-display.warning { color: var(--amber); text-shadow: 0 0 18px rgba(255,204,0,0.9); }
-  .timer-display.critical {
-    color: var(--red);
-    animation: blink 0.5s step-start infinite;
-  }
-  @keyframes blink { 50% { opacity: 0.15; } }
+  .timer-display.warning { color: var(--amber); text-shadow: 0 0 16px rgba(255,204,0,0.9); }
+  .timer-display.critical { color: #ff1100; animation: blink 0.5s step-start infinite; }
+  @keyframes blink { 50% { opacity: 0.12; } }
 
   .led {
-    width: 9px;
-    height: 9px;
+    width: 8px; height: 8px;
     border-radius: 50%;
     background: var(--red);
-    box-shadow: 0 0 7px 2px rgba(255,34,34,0.8);
+    box-shadow: 0 0 6px 2px rgba(255,34,34,0.8);
     animation: ledBlink 1s step-start infinite;
-    margin-top: 5px;
+    margin-top: 4px;
   }
-  @keyframes ledBlink { 50% { opacity: 0.1; box-shadow: none; } }
-  .led.safe { background: var(--green); box-shadow: 0 0 7px 2px rgba(0,255,136,0.8); animation: none; }
+  @keyframes ledBlink { 50% { opacity: 0.08; box-shadow: none; } }
+  .led.safe { background: var(--green); box-shadow: 0 0 6px 2px rgba(0,255,136,0.8); animation: none; }
 
-  /* defusal panel */
   .defusal-panel {
     background: var(--panel);
     border: 1px solid #2a2a3a;
     border-radius: 10px;
-    padding: 18px 14px;
+    padding: 16px 14px;
     width: 100%;
   }
   .panel-label {
-    font-size: 0.62rem;
+    font-size: 0.6rem;
     letter-spacing: 0.22em;
     color: var(--dim);
     text-align: center;
     margin-bottom: 12px;
   }
 
+  /* 4-digit enter inputs */
   .enter-inputs {
     display: flex;
-    gap: 6px;
+    gap: 8px;
     justify-content: center;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     flex-direction: row-reverse;
     width: 100%;
   }
   .enter-inputs input {
     flex: 1;
-    max-width: 54px;
+    max-width: 64px;
     min-width: 0;
-    height: 60px;
+    height: 62px;
     background: #0d0d1a;
     border: 2px solid #2a2a4a;
     border-radius: 6px;
     color: var(--green);
     font-family: 'Orbitron', sans-serif;
-    font-size: clamp(16px, 5vw, 1.8rem);
+    font-size: clamp(16px, 6vw, 1.9rem);
     text-align: center;
     outline: none;
     caret-color: var(--green);
@@ -335,10 +315,7 @@
     -webkit-appearance: none;
     appearance: none;
   }
-  .enter-inputs input:focus {
-    border-color: var(--green);
-    box-shadow: 0 0 10px rgba(0,255,136,0.3);
-  }
+  .enter-inputs input:focus { border-color: var(--green); box-shadow: 0 0 10px rgba(0,255,136,0.3); }
 
   .defuse-btn {
     width: 100%;
@@ -348,10 +325,10 @@
     border-radius: 6px;
     color: var(--green);
     font-family: 'Orbitron', sans-serif;
-    font-size: clamp(0.75rem, 3vw, 0.95rem);
+    font-size: clamp(0.72rem, 3vw, 0.9rem);
     letter-spacing: 0.18em;
     cursor: pointer;
-    transition: background 0.2s, box-shadow 0.2s;
+    transition: background 0.2s;
     touch-action: manipulation;
     min-height: 52px;
     -webkit-appearance: none;
@@ -362,9 +339,9 @@
   .feedback {
     min-height: 20px;
     text-align: center;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    margin-top: 10px;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    margin-top: 8px;
     color: var(--red);
   }
 
@@ -377,141 +354,68 @@
   }
   .shake { animation: shake 0.38s ease; }
 
-  .attempts {
-    font-size: 0.65rem;
-    color: #444;
-    letter-spacing: 0.12em;
-    margin-top: 6px;
-    text-align: center;
-  }
-
-  /* ── WIN SCREEN ── */
-  #win {
-    justify-content: center;
-    background: radial-gradient(ellipse at center, #001a0e 0%, var(--bg) 70%);
-  }
-  #win h1 { color: var(--green); text-shadow: 0 0 28px rgba(0,255,136,0.7); font-size: clamp(1.4rem, 5vw, 2.2rem); }
-
-  .win-icon { margin: 20px 0; }
-  .win-time {
-    font-size: 0.85rem;
-    color: var(--dim);
-    letter-spacing: 0.14em;
-    margin-bottom: 28px;
-    text-align: center;
-  }
+  /* ── WIN ── */
+  #win { justify-content: center; background: radial-gradient(ellipse at center, #001a0e 0%, var(--bg) 70%); }
+  #win h1 { color: var(--green); text-shadow: 0 0 28px rgba(0,255,136,0.7); }
+  .win-icon { margin: 18px 0; }
+  .win-time { font-size: 0.82rem; color: var(--dim); letter-spacing: 0.14em; margin-bottom: 26px; text-align: center; }
   .win-time span { color: var(--green); }
 
-  /* ── LOSE SCREEN ── */
-  #lose {
-    justify-content: center;
-    background: radial-gradient(ellipse at center, #1a0000 0%, var(--bg) 70%);
-  }
-  #lose h1 { color: var(--red); text-shadow: 0 0 38px rgba(255,0,0,0.9); font-size: clamp(1.6rem, 6vw, 2.6rem); }
+  /* ── LOSE ── */
+  #lose { justify-content: center; background: radial-gradient(ellipse at center, #1a0000 0%, var(--bg) 70%); }
+  #lose h1 { color: var(--red); text-shadow: 0 0 38px rgba(255,0,0,0.9); font-size: clamp(1.6rem, 6vw, 2.5rem); }
+  .lose-sub { color: var(--dim); font-size: 0.68rem; letter-spacing: 0.18em; margin: 10px 0 26px; text-align: center; }
 
-  .lose-sub {
-    color: var(--dim);
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
-    margin: 10px 0 28px;
-    text-align: center;
-  }
-
-  /* shared result button */
   .result-btn {
-    padding: 14px 36px;
+    padding: 14px 34px;
     border-radius: 8px;
     font-family: 'Orbitron', sans-serif;
-    font-size: clamp(0.75rem, 3vw, 0.85rem);
+    font-size: clamp(0.72rem, 3vw, 0.82rem);
     letter-spacing: 0.18em;
     cursor: pointer;
     border: 2px solid;
-    transition: background 0.2s, box-shadow 0.2s;
     touch-action: manipulation;
     min-height: 52px;
     -webkit-appearance: none;
     appearance: none;
+    transition: background 0.2s;
   }
   #win .result-btn { border-color: var(--green); color: var(--green); background: transparent; }
   #win .result-btn:active { background: rgba(0,255,136,0.12); }
   #lose .result-btn { border-color: var(--red); color: var(--red); background: transparent; }
   #lose .result-btn:active { background: rgba(255,34,34,0.1); }
 
-  /* ── PARTICLES & EFFECTS ── */
-  .particles {
-    position: fixed;
-    top: 0; right: 0; bottom: 0; left: 0;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 100;
-  }
-  .particle {
-    position: absolute;
-    border-radius: 50%;
-    animation: particleFly 1.8s ease-out forwards;
-  }
+  /* ── EFFECTS ── */
+  .particles { position: fixed; top:0; right:0; bottom:0; left:0; pointer-events:none; overflow:hidden; z-index:100; }
+  .particle { position: absolute; border-radius: 50%; animation: particleFly 1.8s ease-out forwards; }
   @keyframes particleFly {
     0% { transform: translate(0,0) scale(1); opacity: 1; }
     100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
   }
-
-  .flash-overlay {
-    position: fixed;
-    top: 0; right: 0; bottom: 0; left: 0;
-    background: #ff4400;
-    animation: flashFade 0.8s ease-out forwards;
-    pointer-events: none;
-    z-index: 200;
-  }
-  @keyframes flashFade { 0% { opacity: 1; } 100% { opacity: 0; } }
-
-  .explosion-ring {
-    position: fixed;
-    top: 0; right: 0; bottom: 0; left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-    z-index: 50;
-  }
-  .ring {
-    position: absolute;
-    border-radius: 50%;
-    border: 4px solid;
-    animation: expandRing 1.2s ease-out forwards;
-  }
-  @keyframes expandRing {
-    0% { width: 20px; height: 20px; opacity: 1; }
-    100% { width: 600px; height: 600px; opacity: 0; }
-  }
+  .flash-overlay { position:fixed; top:0;right:0;bottom:0;left:0; background:#ff4400; animation:flashFade 0.8s ease-out forwards; pointer-events:none; z-index:200; }
+  @keyframes flashFade { 0%{opacity:1} 100%{opacity:0} }
+  .explosion-ring { position:fixed; top:0;right:0;bottom:0;left:0; display:flex; align-items:center; justify-content:center; pointer-events:none; z-index:50; }
+  .ring { position:absolute; border-radius:50%; border:4px solid; animation:expandRing 1.2s ease-out forwards; }
+  @keyframes expandRing { 0%{width:20px;height:20px;opacity:1} 100%{width:700px;height:700px;opacity:0} }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════ SETUP SCREEN ═══════════════ -->
+<!-- ═══ SETUP ═══ -->
 <div id="setup" class="screen active">
   <h1>יחידת נטרול מטענים</h1>
   <p class="subtitle">הכן את המשימה לפני ההפעלה</p>
 
   <p class="section-label">▸ בחר זמן לנטרול</p>
   <div class="time-btns">
-    <button class="time-btn" data-min="120" onclick="selectTime(this)">
-      120 <span>דקות</span>
-    </button>
-    <button class="time-btn" data-min="90" onclick="selectTime(this)">
-      90 <span>דקות</span>
-    </button>
-    <button class="time-btn" data-min="60" onclick="selectTime(this)">
-      60 <span>דקות</span>
-    </button>
-    <button class="time-btn test-btn" data-seconds="10" onclick="selectTime(this)">
-      TEST <span>10 שניות</span>
-    </button>
+    <button class="time-btn" data-min="120" onclick="selectTime(this)">120<span>דקות</span></button>
+    <button class="time-btn" data-min="90"  onclick="selectTime(this)">90<span>דקות</span></button>
+    <button class="time-btn" data-min="60"  onclick="selectTime(this)">60<span>דקות</span></button>
+    <button class="time-btn test-btn" data-seconds="10" onclick="selectTime(this)">TEST<span>10 שניות</span></button>
   </div>
 
-  <p class="section-label">▸ הגדר קוד נטרול סודי (5 ספרות)</p>
+  <p class="section-label">▸ הגדר קוד נטרול סודי (4 ספרות)</p>
   <div class="code-inputs" id="secretInputs">
-    <input type="tel" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="ספרה 5" id="s4" oninput="moveSetupFocus(this,4)" onkeydown="setupBack(event,this,4)">
     <input type="tel" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="ספרה 4" id="s3" oninput="moveSetupFocus(this,3)" onkeydown="setupBack(event,this,3)">
     <input type="tel" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="ספרה 3" id="s2" oninput="moveSetupFocus(this,2)" onkeydown="setupBack(event,this,2)">
     <input type="tel" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="ספרה 2" id="s1" oninput="moveSetupFocus(this,1)" onkeydown="setupBack(event,this,1)">
@@ -522,95 +426,242 @@
   <p class="error-msg" id="setupError"></p>
 </div>
 
-<!-- ═══════════════ GAME SCREEN ═══════════════ -->
+<!-- ═══ GAME ═══ -->
 <div id="game" class="screen">
   <h1>מטען פעיל</h1>
   <p class="subtitle">נטרל לפני שהזמן יגמר</p>
 
+  <!-- attempt dots -->
+  <div class="attempt-dots">
+    <div class="dot" id="dot2"></div>
+    <div class="dot" id="dot1"></div>
+    <div class="dot" id="dot0"></div>
+  </div>
+
+  <!-- Realistic bomb SVG -->
   <div class="bomb-wrapper">
-    <svg class="bomb-svg" viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
-      <!-- body -->
-      <rect x="30" y="60" width="260" height="130" rx="18" fill="#1a1a1a" stroke="#333" stroke-width="2"/>
-      <!-- metal ridges -->
-      <rect x="30" y="78" width="260" height="6" fill="#222" rx="2"/>
-      <rect x="30" y="166" width="260" height="6" fill="#222" rx="2"/>
-      <!-- bolts -->
-      <circle cx="48" cy="76" r="5" fill="#2a2a2a" stroke="#444" stroke-width="1.5"/>
-      <circle cx="272" cy="76" r="5" fill="#2a2a2a" stroke="#444" stroke-width="1.5"/>
-      <circle cx="48" cy="174" r="5" fill="#2a2a2a" stroke="#444" stroke-width="1.5"/>
-      <circle cx="272" cy="174" r="5" fill="#2a2a2a" stroke="#444" stroke-width="1.5"/>
-      <!-- LCD screen -->
-      <rect x="80" y="88" width="160" height="74" rx="6" fill="#050508" stroke="#1a1a2e" stroke-width="2"/>
-      <rect x="84" y="92" width="152" height="66" rx="4" fill="#020205"/>
+    <svg class="bomb-svg" viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- metal body gradient -->
+        <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"  stop-color="#2e2e2e"/>
+          <stop offset="30%" stop-color="#1c1c1c"/>
+          <stop offset="70%" stop-color="#141414"/>
+          <stop offset="100%" stop-color="#0e0e0e"/>
+        </linearGradient>
+        <!-- edge highlight -->
+        <linearGradient id="edgeGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"  stop-color="#3a3a3a"/>
+          <stop offset="15%" stop-color="#1a1a1a"/>
+          <stop offset="85%" stop-color="#1a1a1a"/>
+          <stop offset="100%" stop-color="#3a3a3a"/>
+        </linearGradient>
+        <!-- LCD glow -->
+        <radialGradient id="lcdGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"  stop-color="#0a0a00" stop-opacity="1"/>
+          <stop offset="100%" stop-color="#020202" stop-opacity="1"/>
+        </radialGradient>
+        <!-- handle gradient -->
+        <linearGradient id="handleGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"  stop-color="#333"/>
+          <stop offset="50%" stop-color="#1a1a1a"/>
+          <stop offset="100%" stop-color="#111"/>
+        </linearGradient>
+        <!-- screw gradient -->
+        <radialGradient id="screwGrad" cx="40%" cy="30%" r="60%">
+          <stop offset="0%"  stop-color="#555"/>
+          <stop offset="100%" stop-color="#222"/>
+        </radialGradient>
+        <!-- green wire -->
+        <linearGradient id="wireGreen" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"  stop-color="#005522"/>
+          <stop offset="50%" stop-color="#00aa44"/>
+          <stop offset="100%" stop-color="#005522"/>
+        </linearGradient>
+      </defs>
+
+      <!-- === HANDLE === -->
+      <rect x="130" y="30" width="80" height="22" rx="10" fill="url(#handleGrad)" stroke="#404040" stroke-width="1.5"/>
+      <rect x="138" y="35" width="64" height="12" rx="5" fill="#111" stroke="#2a2a2a" stroke-width="1"/>
+      <!-- grip ridges -->
+      <line x1="152" y1="35" x2="152" y2="47" stroke="#222" stroke-width="2"/>
+      <line x1="160" y1="35" x2="160" y2="47" stroke="#222" stroke-width="2"/>
+      <line x1="168" y1="35" x2="168" y2="47" stroke="#222" stroke-width="2"/>
+      <line x1="176" y1="35" x2="176" y2="47" stroke="#222" stroke-width="2"/>
+      <line x1="184" y1="35" x2="184" y2="47" stroke="#222" stroke-width="2"/>
+
+      <!-- === MAIN BODY === -->
+      <rect x="22" y="52" width="296" height="160" rx="14" fill="url(#bodyGrad)" stroke="#404040" stroke-width="2"/>
+      <!-- top/bottom edge highlight strips -->
+      <rect x="22" y="52" width="296" height="8"  rx="6" fill="url(#edgeGrad)" opacity="0.6"/>
+      <rect x="22" y="204" width="296" height="8" rx="6" fill="url(#edgeGrad)" opacity="0.4"/>
+      <!-- side panel line -->
+      <line x1="80"  y1="52" x2="80"  y2="212" stroke="#333" stroke-width="1"/>
+      <line x1="260" y1="52" x2="260" y2="212" stroke="#333" stroke-width="1"/>
+
+      <!-- === CORNER SCREWS === -->
+      <circle cx="40"  cy="68"  r="7" fill="url(#screwGrad)" stroke="#555" stroke-width="1.2"/>
+      <circle cx="300" cy="68"  r="7" fill="url(#screwGrad)" stroke="#555" stroke-width="1.2"/>
+      <circle cx="40"  cy="196" r="7" fill="url(#screwGrad)" stroke="#555" stroke-width="1.2"/>
+      <circle cx="300" cy="196" r="7" fill="url(#screwGrad)" stroke="#555" stroke-width="1.2"/>
+      <!-- screw slots -->
+      <line x1="37" y1="68" x2="43" y2="68" stroke="#111" stroke-width="1.5"/>
+      <line x1="297" y1="68" x2="303" y2="68" stroke="#111" stroke-width="1.5"/>
+      <line x1="37" y1="196" x2="43" y2="196" stroke="#111" stroke-width="1.5"/>
+      <line x1="297" y1="196" x2="303" y2="196" stroke="#111" stroke-width="1.5"/>
+
+      <!-- === LCD DISPLAY === -->
+      <rect x="86" y="72" width="168" height="90" rx="5" fill="#080808" stroke="#222" stroke-width="2"/>
+      <!-- LCD bezel inner -->
+      <rect x="90" y="76" width="160" height="82" rx="3" fill="url(#lcdGlow)"/>
       <!-- LCD scan lines -->
-      <line x1="84" y1="100" x2="236" y2="100" stroke="#0a0a1a" stroke-width="1.5"/>
-      <line x1="84" y1="108" x2="236" y2="108" stroke="#0a0a1a" stroke-width="1.5"/>
-      <line x1="84" y1="116" x2="236" y2="116" stroke="#0a0a1a" stroke-width="1.5"/>
-      <line x1="84" y1="124" x2="236" y2="124" stroke="#0a0a1a" stroke-width="1.5"/>
-      <line x1="84" y1="132" x2="236" y2="132" stroke="#0a0a1a" stroke-width="1.5"/>
-      <line x1="84" y1="140" x2="236" y2="140" stroke="#0a0a1a" stroke-width="1.5"/>
-      <line x1="84" y1="148" x2="236" y2="148" stroke="#0a0a1a" stroke-width="1.5"/>
-      <!-- wires left -->
-      <path d="M30,100 Q15,100 10,90 Q5,80 15,75" stroke="#cc3300" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path d="M30,120 Q8,120 8,108 Q8,96 18,95" stroke="#ffcc00" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path d="M30,140 Q12,140 10,150 Q8,162 20,165" stroke="#00aa55" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path d="M30,158 Q16,158 12,170 Q8,182 22,185" stroke="#2255cc" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <!-- wires right -->
-      <path d="M290,100 Q308,100 312,88 Q316,76 306,72" stroke="#cc3300" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path d="M290,120 Q310,120 312,108" stroke="#ffcc00" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path d="M290,140 Q308,140 312,152 Q316,164 304,168" stroke="#00aa55" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path d="M290,158 Q308,158 312,172" stroke="#2255cc" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <!-- side panels -->
-      <rect x="46" y="102" width="22" height="16" rx="2" fill="#111" stroke="#2a2a2a"/>
-      <rect x="46" y="124" width="22" height="16" rx="2" fill="#111" stroke="#2a2a2a"/>
-      <rect x="46" y="146" width="22" height="16" rx="2" fill="#111" stroke="#2a2a2a"/>
-      <rect x="252" y="102" width="22" height="16" rx="2" fill="#111" stroke="#2a2a2a"/>
-      <rect x="252" y="124" width="22" height="16" rx="2" fill="#111" stroke="#2a2a2a"/>
-      <rect x="252" y="146" width="22" height="16" rx="2" fill="#111" stroke="#2a2a2a"/>
-      <!-- toggle switches -->
-      <rect x="50" y="106" width="14" height="6" rx="3" fill="#330000"/>
-      <rect x="50" y="128" width="14" height="6" rx="3" fill="#003300"/>
-      <rect x="50" y="150" width="14" height="6" rx="3" fill="#333300"/>
-      <circle cx="56" cy="109" r="3" fill="#cc0000"/>
-      <circle cx="62" cy="131" r="3" fill="#00cc44"/>
-      <circle cx="56" cy="153" r="3" fill="#ccaa00"/>
-      <!-- LED -->
-      <circle id="svgLed" cx="160" cy="73" r="5" fill="#ff2222">
-        <animate attributeName="opacity" values="1;0.15;1" dur="1s" repeatCount="indefinite"/>
+      <line x1="90" y1="84"  x2="250" y2="84"  stroke="#0d0d08" stroke-width="1.5"/>
+      <line x1="90" y1="92"  x2="250" y2="92"  stroke="#0d0d08" stroke-width="1.5"/>
+      <line x1="90" y1="100" x2="250" y2="100" stroke="#0d0d08" stroke-width="1.5"/>
+      <line x1="90" y1="108" x2="250" y2="108" stroke="#0d0d08" stroke-width="1.5"/>
+      <line x1="90" y1="116" x2="250" y2="116" stroke="#0d0d08" stroke-width="1.5"/>
+      <line x1="90" y1="124" x2="250" y2="124" stroke="#0d0d08" stroke-width="1.5"/>
+      <line x1="90" y1="132" x2="250" y2="132" stroke="#0d0d08" stroke-width="1.5"/>
+      <line x1="90" y1="140" x2="250" y2="140" stroke="#0d0d08" stroke-width="1.5"/>
+      <line x1="90" y1="148" x2="250" y2="148" stroke="#0d0d08" stroke-width="1.5"/>
+      <!-- LCD label -->
+      <text x="170" y="170" text-anchor="middle" font-family="monospace" font-size="6" fill="#2a2a18" letter-spacing="2">DETONATOR MK-IV</text>
+
+      <!-- === LED INDICATOR (top center) === -->
+      <circle id="svgLed" cx="170" cy="63" r="5.5" fill="#ff2222">
+        <animate attributeName="opacity" values="1;0.1;1" dur="1s" repeatCount="indefinite"/>
       </circle>
-      <!-- handle -->
-      <rect x="120" y="45" width="80" height="18" rx="8" fill="#1e1e1e" stroke="#333" stroke-width="1.5"/>
-      <rect x="130" y="49" width="60" height="10" rx="5" fill="#161616"/>
-      <!-- serial -->
-      <text x="160" y="200" text-anchor="middle" font-family="monospace" font-size="7" fill="#2a2a2a">SN-74XB-2049 // CLASS-A EXPLOSIVE</text>
+      <!-- LED ring -->
+      <circle cx="170" cy="63" r="7.5" fill="none" stroke="#2a0000" stroke-width="1.5"/>
+
+      <!-- === LEFT SIDE PANEL === -->
+      <!-- circuit board texture -->
+      <rect x="26" y="56" width="50" height="152" rx="2" fill="#0d0d12" opacity="0.6"/>
+      <!-- circuit traces -->
+      <line x1="36" y1="75" x2="70" y2="75" stroke="#0a2a0a" stroke-width="1.5"/>
+      <line x1="36" y1="85" x2="55" y2="85" stroke="#1a1a00" stroke-width="1.5"/>
+      <line x1="55" y1="85" x2="55" y2="95" stroke="#1a1a00" stroke-width="1.5"/>
+      <line x1="36" y1="95" x2="70" y2="95" stroke="#0a2a0a" stroke-width="1.5"/>
+      <!-- component box -->
+      <rect x="30" y="102" width="46" height="28" rx="3" fill="#0a0a16" stroke="#1a1a2e" stroke-width="1.2"/>
+      <rect x="34" y="106" width="38" height="20" rx="2" fill="#060610"/>
+      <!-- IC chip pins -->
+      <line x1="30" y1="108" x2="34" y2="108" stroke="#333" stroke-width="1.2"/>
+      <line x1="30" y1="113" x2="34" y2="113" stroke="#333" stroke-width="1.2"/>
+      <line x1="30" y1="118" x2="34" y2="118" stroke="#333" stroke-width="1.2"/>
+      <line x1="30" y1="123" x2="34" y2="123" stroke="#333" stroke-width="1.2"/>
+      <line x1="76" y1="108" x2="72" y2="108" stroke="#333" stroke-width="1.2"/>
+      <line x1="76" y1="113" x2="72" y2="113" stroke="#333" stroke-width="1.2"/>
+      <line x1="76" y1="118" x2="72" y2="118" stroke="#333" stroke-width="1.2"/>
+      <line x1="76" y1="123" x2="72" y2="123" stroke="#333" stroke-width="1.2"/>
+      <!-- toggle switch -->
+      <rect x="30" y="140" width="46" height="18" rx="3" fill="#111" stroke="#2a2a2a" stroke-width="1"/>
+      <rect x="34" y="143" width="16" height="12" rx="5" fill="#330000"/>
+      <circle cx="42" cy="149" r="4" fill="#cc0000"/>
+      <!-- small LED row -->
+      <circle cx="58" cy="149" r="2.5" fill="#003300"/>
+      <circle cx="66" cy="149" r="2.5" fill="#330000"/>
+      <!-- more traces -->
+      <line x1="36" y1="165" x2="70" y2="165" stroke="#0a2a0a" stroke-width="1.5"/>
+      <line x1="36" y1="175" x2="55" y2="175" stroke="#002244" stroke-width="1.5"/>
+      <line x1="55" y1="175" x2="55" y2="185" stroke="#002244" stroke-width="1.5"/>
+      <line x1="55" y1="185" x2="70" y2="185" stroke="#002244" stroke-width="1.5"/>
+      <circle cx="36" cy="175" r="2" fill="#002244"/>
+      <circle cx="55" cy="175" r="2" fill="#002244"/>
+
+      <!-- === RIGHT SIDE PANEL === -->
+      <rect x="264" y="56" width="50" height="152" rx="2" fill="#0d0d12" opacity="0.6"/>
+      <!-- more circuit traces -->
+      <line x1="270" y1="75" x2="304" y2="75" stroke="#2a0a0a" stroke-width="1.5"/>
+      <line x1="285" y1="75" x2="285" y2="90" stroke="#2a0a0a" stroke-width="1.5"/>
+      <line x1="270" y1="90" x2="304" y2="90" stroke="#1a1a00" stroke-width="1.5"/>
+      <!-- capacitor symbol -->
+      <rect x="268" y="100" width="20" height="30" rx="2" fill="#0a0a0a" stroke="#2a2a2a" stroke-width="1"/>
+      <line x1="278" y1="100" x2="278" y2="93" stroke="#333" stroke-width="1.5"/>
+      <line x1="278" y1="130" x2="278" y2="137" stroke="#333" stroke-width="1.5"/>
+      <rect x="270" y="109" width="16" height="12" rx="1" fill="#1a0000"/>
+      <text x="278" y="118" text-anchor="middle" font-family="monospace" font-size="5" fill="#440000">+</text>
+      <!-- relay module -->
+      <rect x="295" y="100" width="18" height="30" rx="2" fill="#0d0a00" stroke="#2a2a00" stroke-width="1"/>
+      <rect x="297" y="104" width="14" height="22" rx="1" fill="#080800"/>
+      <!-- toggle right -->
+      <rect x="264" y="140" width="46" height="18" rx="3" fill="#111" stroke="#2a2a2a" stroke-width="1"/>
+      <rect x="290" y="143" width="16" height="12" rx="5" fill="#003300"/>
+      <circle cx="298" cy="149" r="4" fill="#00cc44"/>
+      <circle cx="276" cy="149" r="2.5" fill="#330000"/>
+      <circle cx="268" cy="149" r="2.5" fill="#001133"/>
+      <!-- traces lower right -->
+      <line x1="270" y1="165" x2="304" y2="165" stroke="#2a0a0a" stroke-width="1.5"/>
+      <line x1="285" y1="165" x2="285" y2="180" stroke="#1a1a00" stroke-width="1.5"/>
+      <circle cx="285" cy="165" r="2" fill="#2a0000"/>
+      <circle cx="285" cy="180" r="2" fill="#1a1a00"/>
+      <line x1="270" y1="180" x2="304" y2="180" stroke="#00224a" stroke-width="1.5"/>
+
+      <!-- === WIRES — detailed with connectors === -->
+      <!-- RED wire left — double-stranded -->
+      <path d="M22,90 Q6,90 4,80 Q2,66 12,62" stroke="#8b0000" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <path d="M22,90 Q6,90 4,80 Q2,66 12,62" stroke="#dd1111" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <circle cx="22" cy="90" r="4" fill="#555" stroke="#888" stroke-width="1"/>
+      <!-- YELLOW wire left -->
+      <path d="M22,110 Q2,110 2,97 Q2,84 14,82" stroke="#8b6000" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <path d="M22,110 Q2,110 2,97 Q2,84 14,82" stroke="#ddaa00" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <circle cx="22" cy="110" r="4" fill="#555" stroke="#888" stroke-width="1"/>
+      <!-- GREEN wire left -->
+      <path d="M22,136 Q4,136 4,150 Q4,165 16,168" stroke="#005522" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <path d="M22,136 Q4,136 4,150 Q4,165 16,168" stroke="#00bb44" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <circle cx="22" cy="136" r="4" fill="#555" stroke="#888" stroke-width="1"/>
+      <!-- BLUE wire left -->
+      <path d="M22,158 Q6,158 6,172 Q6,185 20,188" stroke="#001166" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <path d="M22,158 Q6,158 6,172 Q6,185 20,188" stroke="#1155cc" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <circle cx="22" cy="158" r="4" fill="#555" stroke="#888" stroke-width="1"/>
+
+      <!-- RED wire right -->
+      <path d="M318,90 Q334,90 336,80 Q338,66 328,62" stroke="#8b0000" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <path d="M318,90 Q334,90 336,80 Q338,66 328,62" stroke="#dd1111" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <circle cx="318" cy="90" r="4" fill="#555" stroke="#888" stroke-width="1"/>
+      <!-- YELLOW wire right -->
+      <path d="M318,112 Q336,112 338,100 Q340,88 328,85" stroke="#8b6000" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <path d="M318,112 Q336,112 338,100 Q340,88 328,85" stroke="#ddaa00" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <circle cx="318" cy="112" r="4" fill="#555" stroke="#888" stroke-width="1"/>
+      <!-- GREEN wire right -->
+      <path d="M318,138 Q336,138 338,152 Q340,166 326,170" stroke="#005522" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <path d="M318,138 Q336,138 338,152 Q340,166 326,170" stroke="#00bb44" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <circle cx="318" cy="138" r="4" fill="#555" stroke="#888" stroke-width="1"/>
+      <!-- WHITE wire right -->
+      <path d="M318,160 Q334,160 336,174 Q338,188 324,190" stroke="#444" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <path d="M318,160 Q334,160 336,174 Q338,188 324,190" stroke="#cccccc" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="318" cy="160" r="4" fill="#555" stroke="#888" stroke-width="1"/>
+
+      <!-- === BOTTOM LABEL === -->
+      <text x="170" y="222" text-anchor="middle" font-family="monospace" font-size="6.5" fill="#2a2a2a" letter-spacing="3">MIL-SPEC C4 // SN-74XB-2049</text>
     </svg>
 
+    <!-- Timer over LCD -->
     <div class="timer-overlay">
       <div class="timer-display" id="timerDisplay">00:00</div>
       <div class="led" id="led"></div>
     </div>
   </div>
 
+  <!-- Defusal panel -->
   <div class="defusal-panel">
-    <p class="panel-label">▸ הזן את קוד הנטרול</p>
+    <p class="panel-label">▸ הזן קוד נטרול (4 ספרות) — 3 ניסיונות</p>
     <div class="enter-inputs" id="enterInputs">
-      <input type="tel" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="ספרה 5" id="e4" oninput="moveEnterFocus(this,4)" onkeydown="enterBack(event,this,4)">
       <input type="tel" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="ספרה 4" id="e3" oninput="moveEnterFocus(this,3)" onkeydown="enterBack(event,this,3)">
       <input type="tel" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="ספרה 3" id="e2" oninput="moveEnterFocus(this,2)" onkeydown="enterBack(event,this,2)">
       <input type="tel" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="ספרה 2" id="e1" oninput="moveEnterFocus(this,1)" onkeydown="enterBack(event,this,1)">
       <input type="tel" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="ספרה 1" id="e0" oninput="moveEnterFocus(this,0)" onkeydown="enterBack(event,this,0)">
     </div>
-    <button class="defuse-btn" onclick="attemptDefuse()">נטרל מטען</button>
+    <button class="defuse-btn" id="defuseBtn" onclick="attemptDefuse()">נטרל מטען</button>
     <p class="feedback" id="feedback"></p>
-    <p class="attempts" id="attempts"></p>
   </div>
 </div>
 
-<!-- ═══════════════ WIN SCREEN ═══════════════ -->
+<!-- ═══ WIN ═══ -->
 <div id="win" class="screen">
   <h1>המטען נוטרל!</h1>
   <div class="win-icon">
-    <svg width="90" height="90" viewBox="0 0 100 100">
+    <svg width="86" height="86" viewBox="0 0 100 100">
       <circle cx="50" cy="50" r="46" fill="none" stroke="#00ff88" stroke-width="3"/>
       <polyline points="28,52 44,68 72,36" fill="none" stroke="#00ff88" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
@@ -619,22 +670,22 @@
   <button class="result-btn" onclick="resetGame()">משימה חדשה</button>
 </div>
 
-<!-- ═══════════════ LOSE SCREEN ═══════════════ -->
+<!-- ═══ LOSE ═══ -->
 <div id="lose" class="screen">
   <h1>פיצוץ!</h1>
-  <p class="lose-sub">המטען התפוצץ — המשימה נכשלה</p>
-  <svg width="100" height="100" viewBox="0 0 110 110" style="margin-bottom:24px">
+  <p class="lose-sub" id="loseSub">המטען התפוצץ — המשימה נכשלה</p>
+  <svg width="96" height="96" viewBox="0 0 110 110" style="margin-bottom:22px">
     <circle cx="55" cy="55" r="30" fill="#3a0000"/>
     <circle cx="55" cy="55" r="20" fill="#660000"/>
     <circle cx="55" cy="55" r="10" fill="#cc2200"/>
-    <line x1="55" y1="55" x2="55" y2="8"  stroke="#ff6600" stroke-width="4" stroke-linecap="round"/>
-    <line x1="55" y1="55" x2="55" y2="102" stroke="#ff6600" stroke-width="4" stroke-linecap="round"/>
-    <line x1="55" y1="55" x2="8"  y2="55" stroke="#ff6600" stroke-width="4" stroke-linecap="round"/>
-    <line x1="55" y1="55" x2="102" y2="55" stroke="#ff6600" stroke-width="4" stroke-linecap="round"/>
-    <line x1="55" y1="55" x2="22" y2="22" stroke="#ff4400" stroke-width="3" stroke-linecap="round"/>
-    <line x1="55" y1="55" x2="88" y2="22" stroke="#ff4400" stroke-width="3" stroke-linecap="round"/>
-    <line x1="55" y1="55" x2="22" y2="88" stroke="#ff4400" stroke-width="3" stroke-linecap="round"/>
-    <line x1="55" y1="55" x2="88" y2="88" stroke="#ff4400" stroke-width="3" stroke-linecap="round"/>
+    <line x1="55" y1="55" x2="55" y2="8"   stroke="#ff6600" stroke-width="4" stroke-linecap="round"/>
+    <line x1="55" y1="55" x2="55" y2="102"  stroke="#ff6600" stroke-width="4" stroke-linecap="round"/>
+    <line x1="55" y1="55" x2="8"  y2="55"   stroke="#ff6600" stroke-width="4" stroke-linecap="round"/>
+    <line x1="55" y1="55" x2="102" y2="55"  stroke="#ff6600" stroke-width="4" stroke-linecap="round"/>
+    <line x1="55" y1="55" x2="22" y2="22"   stroke="#ff4400" stroke-width="3" stroke-linecap="round"/>
+    <line x1="55" y1="55" x2="88" y2="22"   stroke="#ff4400" stroke-width="3" stroke-linecap="round"/>
+    <line x1="55" y1="55" x2="22" y2="88"   stroke="#ff4400" stroke-width="3" stroke-linecap="round"/>
+    <line x1="55" y1="55" x2="88" y2="88"   stroke="#ff4400" stroke-width="3" stroke-linecap="round"/>
   </svg>
   <button class="result-btn" onclick="resetGame()">נסה שוב</button>
 </div>
@@ -642,20 +693,58 @@
 <div class="particles" id="particles"></div>
 
 <script>
+  /* ── State ── */
   let secretCode = '';
   let totalSeconds = 0;
   let remainingSeconds = 0;
   let timerInterval = null;
-  let attempts = 0;
-  const setupIds = ['s0','s1','s2','s3','s4'];
-  const enterIds = ['e0','e1','e2','e3','e4'];
+  let wrongAttempts = 0;
+  const MAX_ATTEMPTS = 3;
+  const setupIds = ['s0','s1','s2','s3'];   // 4 digits
+  const enterIds = ['e0','e1','e2','e3'];   // 4 digits
 
-  /* ── setup input helpers ── */
+  /* ── Audio (Web Audio API ticking) ── */
+  let audioCtx = null;
+  let tickInterval = null;
+
+  function resumeAudio() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+  }
+
+  function tick(freq, gain) {
+    if (!audioCtx) return;
+    const osc = audioCtx.createOscillator();
+    const g   = audioCtx.createGain();
+    osc.connect(g);
+    g.connect(audioCtx.destination);
+    osc.type = 'square';
+    osc.frequency.value = freq;
+    g.gain.setValueAtTime(gain, audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.04);
+    osc.start(audioCtx.currentTime);
+    osc.stop(audioCtx.currentTime + 0.05);
+  }
+
+  function startTicking() {
+    stopTicking();
+    const fast = remainingSeconds <= 10;
+    tick(900, 0.06);
+    tickInterval = setInterval(() => {
+      const isFast = remainingSeconds <= 10;
+      tick(isFast ? 1100 : 900, isFast ? 0.1 : 0.06);
+    }, remainingSeconds <= 10 ? 500 : 1000);
+  }
+
+  function stopTicking() {
+    clearInterval(tickInterval);
+    tickInterval = null;
+  }
+
+  /* ── Input helpers ── */
   function moveSetupFocus(el, idx) {
-    // keep only last digit entered (handles iOS paste/replace)
-    const v = el.value.replace(/[^0-9]/g, '');
-    el.value = v.slice(-1);
-    if (el.value && idx < 4) document.getElementById(setupIds[idx + 1]).focus();
+    el.value = el.value.replace(/[^0-9]/g, '').slice(-1);
+    if (el.value && idx < 3) document.getElementById(setupIds[idx + 1]).focus();
   }
   function setupBack(e, el, idx) {
     if (e.key === 'Backspace' && !el.value && idx > 0) {
@@ -663,12 +752,9 @@
       document.getElementById(setupIds[idx - 1]).focus();
     }
   }
-
-  /* ── enter input helpers ── */
   function moveEnterFocus(el, idx) {
-    const v = el.value.replace(/[^0-9]/g, '');
-    el.value = v.slice(-1);
-    if (el.value && idx < 4) document.getElementById(enterIds[idx + 1]).focus();
+    el.value = el.value.replace(/[^0-9]/g, '').slice(-1);
+    if (el.value && idx < 3) document.getElementById(enterIds[idx + 1]).focus();
   }
   function enterBack(e, el, idx) {
     if (e.key === 'Backspace' && !el.value && idx > 0) {
@@ -677,18 +763,16 @@
     }
   }
 
-  /* ── time selector ── */
+  /* ── Time selector ── */
   function selectTime(btn) {
     document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('selected'));
     btn.classList.add('selected');
-    if (btn.dataset.seconds) {
-      totalSeconds = parseInt(btn.dataset.seconds, 10);
-    } else {
-      totalSeconds = parseInt(btn.dataset.min, 10) * 60;
-    }
+    totalSeconds = btn.dataset.seconds
+      ? parseInt(btn.dataset.seconds, 10)
+      : parseInt(btn.dataset.min, 10) * 60;
   }
 
-  /* ── arm ── */
+  /* ── Arm ── */
   function armDevice() {
     document.getElementById('setupError').textContent = '';
     if (!totalSeconds) {
@@ -697,28 +781,36 @@
     }
     const digits = setupIds.map(id => document.getElementById(id).value);
     if (digits.some(d => d === '')) {
-      document.getElementById('setupError').textContent = '! יש להזין קוד סודי של 5 ספרות';
+      document.getElementById('setupError').textContent = '! יש להזין קוד סודי של 4 ספרות';
       return;
     }
     secretCode = digits.join('');
-    attempts = 0;
+    wrongAttempts = 0;
     remainingSeconds = totalSeconds;
+    updateDots();
     showScreen('game');
     updateTimerDisplay();
+    resumeAudio();
     startTimer();
-    // slight delay before focus to let keyboard settle on iOS
+    startTicking();
     setTimeout(() => document.getElementById('e0').focus(), 300);
   }
 
-  /* ── timer ── */
+  /* ── Timer ── */
   function startTimer() {
     clearInterval(timerInterval);
     timerInterval = setInterval(() => {
       remainingSeconds--;
       updateTimerDisplay();
+      // update tick speed when hitting 10s threshold
+      if (remainingSeconds === 10) {
+        stopTicking();
+        startTicking();
+      }
       if (remainingSeconds <= 0) {
         clearInterval(timerInterval);
-        triggerExplosion();
+        stopTicking();
+        triggerExplosion('הזמן נגמר — המטען התפוצץ');
       }
     }, 1000);
   }
@@ -726,47 +818,64 @@
   function updateTimerDisplay() {
     const m = Math.floor(remainingSeconds / 60);
     const s = remainingSeconds % 60;
-    const display = document.getElementById('timerDisplay');
-    display.textContent = pad(m) + ':' + pad(s);
-    display.className = 'timer-display';
-    if (remainingSeconds <= 10) display.classList.add('critical');
-    else if (remainingSeconds <= 60) display.classList.add('warning');
+    const el = document.getElementById('timerDisplay');
+    el.textContent = pad(m) + ':' + pad(s);
+    el.className = 'timer-display';
+    if (remainingSeconds <= 10) el.classList.add('critical');
+    else if (remainingSeconds <= 60) el.classList.add('warning');
   }
 
   function pad(n) { return String(n).padStart(2, '0'); }
 
-  /* ── defuse attempt ── */
+  /* ── Attempt dots (3 lives) ── */
+  function updateDots() {
+    for (let i = 0; i < MAX_ATTEMPTS; i++) {
+      const dot = document.getElementById('dot' + i);
+      dot.classList.toggle('used', i < wrongAttempts);
+    }
+  }
+
+  /* ── Defuse ── */
   function attemptDefuse() {
     const digits = enterIds.map(id => document.getElementById(id).value);
     if (digits.some(d => d === '')) {
-      showFeedback('! יש להזין את כל 5 הספרות');
+      document.getElementById('feedback').textContent = '! יש להזין את כל 4 הספרות';
       return;
     }
     const entered = digits.join('');
-    attempts++;
+
     if (entered === secretCode) {
       clearInterval(timerInterval);
+      stopTicking();
       document.getElementById('led').classList.add('safe');
       document.getElementById('svgLed').setAttribute('fill', '#00ff88');
+      document.getElementById('defuseBtn').disabled = true;
       setTimeout(() => {
         document.getElementById('winTime').innerHTML =
-          'זמן שנותר: <span>' + pad(Math.floor(remainingSeconds/60)) + ':' + pad(remainingSeconds%60) + '</span>';
+          'זמן שנותר: <span>' + pad(Math.floor(remainingSeconds / 60)) + ':' + pad(remainingSeconds % 60) + '</span>';
         showScreen('win');
         spawnParticles('#00ff88', null);
       }, 500);
     } else {
-      showFeedback('קוד שגוי — נסה שוב');
-      const inp = document.getElementById('enterInputs');
-      inp.classList.add('shake');
-      setTimeout(() => inp.classList.remove('shake'), 400);
+      wrongAttempts++;
+      updateDots();
       clearEnterInputs();
-      document.getElementById('attempts').textContent = 'ניסיון ' + attempts;
-    }
-  }
 
-  function showFeedback(msg) {
-    const el = document.getElementById('feedback');
-    el.textContent = msg;
+      if (wrongAttempts >= MAX_ATTEMPTS) {
+        clearInterval(timerInterval);
+        stopTicking();
+        document.getElementById('defuseBtn').disabled = true;
+        document.getElementById('feedback').textContent = '3 טעויות — פיצוץ מיידי!';
+        setTimeout(() => triggerExplosion('3 קודים שגויים — המשימה נכשלה'), 600);
+      } else {
+        const left = MAX_ATTEMPTS - wrongAttempts;
+        document.getElementById('feedback').textContent =
+          'קוד שגוי — נותרו ' + left + ' ניסיון' + (left === 1 ? '' : 'ות');
+        const inp = document.getElementById('enterInputs');
+        inp.classList.add('shake');
+        setTimeout(() => inp.classList.remove('shake'), 400);
+      }
+    }
   }
 
   function clearEnterInputs() {
@@ -774,8 +883,10 @@
     setTimeout(() => document.getElementById('e0').focus(), 50);
   }
 
-  /* ── explosion ── */
-  function triggerExplosion() {
+  /* ── Explosion ── */
+  function triggerExplosion(reason) {
+    document.getElementById('loseSub').textContent = reason || 'המטען התפוצץ — המשימה נכשלה';
+
     const flash = document.createElement('div');
     flash.className = 'flash-overlay';
     document.body.appendChild(flash);
@@ -783,66 +894,67 @@
 
     const ring = document.createElement('div');
     ring.className = 'explosion-ring';
-    ['#ff6600', '#ff2200'].forEach((color, i) => {
+    ['#ff6600','#ff2200','#ffaa00'].forEach((c, i) => {
       const r = document.createElement('div');
       r.className = 'ring';
-      r.style.cssText = 'border-color:' + color + ';animation-delay:' + (i * 0.15) + 's';
+      r.style.cssText = 'border-color:' + c + ';animation-delay:' + (i * 0.12) + 's';
       ring.appendChild(r);
     });
     document.body.appendChild(ring);
-    setTimeout(() => ring.remove(), 1400);
+    setTimeout(() => ring.remove(), 1500);
 
     spawnParticles('#ff4400', '#ff8800');
     setTimeout(() => showScreen('lose'), 900);
   }
 
-  /* ── particles ── */
-  function spawnParticles(color1, color2) {
+  /* ── Particles ── */
+  function spawnParticles(c1, c2) {
     const container = document.getElementById('particles');
     container.innerHTML = '';
-    const colors = color2 ? [color1, color2, '#ffcc00'] : [color1, '#aaffcc', '#ffffff'];
-    const cx = window.innerWidth / 2;
-    const cy = window.innerHeight / 2;
+    const colors = c2 ? [c1, c2, '#ffcc00'] : [c1, '#aaffcc', '#ffffff'];
+    const cx = window.innerWidth / 2, cy = window.innerHeight / 2;
     for (let i = 0; i < 55; i++) {
       const p = document.createElement('div');
       p.className = 'particle';
       const angle = Math.random() * 2 * Math.PI;
-      const dist = 100 + Math.random() * 260;
+      const dist = 80 + Math.random() * 260;
+      const sz = 4 + Math.random() * 7;
       p.style.cssText =
         'left:' + cx + 'px;top:' + cy + 'px;' +
         'background:' + colors[i % colors.length] + ';' +
         '--dx:' + (Math.cos(angle) * dist) + 'px;' +
         '--dy:' + (Math.sin(angle) * dist) + 'px;' +
-        'animation-delay:' + (Math.random() * 0.25) + 's;' +
+        'animation-delay:' + (Math.random() * 0.22) + 's;' +
         'animation-duration:' + (1.1 + Math.random() * 0.8) + 's;' +
-        'width:' + (4 + Math.random() * 7) + 'px;' +
-        'height:' + (4 + Math.random() * 7) + 'px;';
+        'width:' + sz + 'px;height:' + sz + 'px;';
       container.appendChild(p);
     }
-    setTimeout(() => { container.innerHTML = ''; }, 2500);
+    setTimeout(() => { container.innerHTML = ''; }, 2400);
   }
 
-  /* ── screen transitions ── */
+  /* ── Screen ── */
   function showScreen(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
-    // scroll to top on iOS
     document.body.scrollTop = 0;
   }
 
-  /* ── reset ── */
+  /* ── Reset ── */
   function resetGame() {
     clearInterval(timerInterval);
+    stopTicking();
     secretCode = '';
     totalSeconds = 0;
     remainingSeconds = 0;
-    attempts = 0;
+    wrongAttempts = 0;
     document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('selected'));
     setupIds.forEach(id => document.getElementById(id).value = '');
-    clearEnterInputs();
-    ['feedback','attempts','setupError'].forEach(id => document.getElementById(id).textContent = '');
+    enterIds.forEach(id => document.getElementById(id).value = '');
+    ['feedback','setupError'].forEach(id => document.getElementById(id).textContent = '');
+    document.getElementById('defuseBtn').disabled = false;
     document.getElementById('led').classList.remove('safe');
     document.getElementById('svgLed').setAttribute('fill', '#ff2222');
+    updateDots();
     showScreen('setup');
   }
 </script>
